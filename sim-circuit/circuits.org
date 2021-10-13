@@ -1,0 +1,137 @@
+:PROPERTIES:
+:ID:       ca95bd94-83ea-4ea8-8a20-77adeff8f7ca
+:END:
+#+TITLE:     Circuits
+#+AUTHOR:    David Conner
+#+EMAIL:     noreply@te.xel.io
+#+DESCRIPTION: notes
+
+* Main
+
+** Kicad Components
+
+** Spice Example
+
+#+BEGIN_SRC spice :tangle circuits/spice-example.cir :results none
+,*Virtual Ground Test: opamp gain = 1000
+vin in 0 dc 0V sin(0 0.1 100Hz)
+r1 in inn 10k
+r2 inn out 10k
+EOpamp out 0 0 inn 1000
+.tran 0.1ms 0.05s
+.print tran v(in)
+.meas tran vtest find v(in) at=0.04e-3
+.end
+.control
+run
+set gnuplot_terminal=png
+,*gnuplot $file v(in) v(out) v(inn)
+gnuplot circuits/spice-example v(in) v(out) v(inn)
+.endc
+#+END_SRC
+
+* Learning =ngspice=
+
+
+** Voltage Sources
+
++ For AC =sin(V0, VA, FREQ, TD, THETA, PHASE)=
+  - V0
+  - VA
+  - FREQ
+  - TD
+  - THETA
+  - PHASE
+
++ For AC =pulse(VL VH TD TR TF PW PER PHASE)=
+  - VL :: start voltage
+  - VH :: end voltage
+  - TD :: delay
+  - TR :: rise
+  - TF :: fall
+  - PW :: pulse width
+  - PER :: period of repitition
+  - PHASE :: phase shift
+
+** Plotting
+
+*** TODO brief summaries on:
++ [ ] .tran
++ [ ] .print
++ [ ] .probe (.save)
+
+* Circuits
+
+** Spice Test
+
+#+begin_src spice :tangle ./circuits/spice-test.cir :results none
+
+#+end_src
+
+** RC2 Net
+
+From NgSpice.jl
+
+
+** RC2 Plot
+
+#+begin_src spice :tangle ./circuits/rc2-plot.net :results none
+,*Spice netlister for gnetlist
+R5 n4 n5 1k
+V1 n0 0 dc 1 pulse 0 1 0 10n 10n 250u 5m 0
+,*V1 n0 0 dc 1 ac 2 sin(0 2 100)
+R4 n3 n4 1k
+R3 n2 n3 5k
+C5 n5 0 1n
+R2 n1 n2 1K
+C4 n4 0 1n
+R1 n0 n1 1k
+C3 n3 0 1n
+C2 n2 0 1n
+C1 n1 0 1n
+I1 n5 0 DC 0.01mA
+R6 0 n5 10k
+
+.tran 0.1ms 0.05s
+.print tran v(n0)
+*.print tran i(n0)
+.meas tran vtest find v(n5) at=0.04e-3
+,*.meas tran vtest find i(n0) at=0.04e-3
+.end
+
+.control
+run
+set gnuplot_terminal=png
+gnuplot circuits/rc2.net v(n0) v(n5)
+*gnuplot circuits/rc2.net v(n0) v(n5) i(n0)
+.endc
+#+end_src
+
+** Mosfet
+
+From NgSpice.jl
+
+#+begin_src spice :tangle ./circuits/mosfet.cir :results none
+,*
+,* This circuit contains only Berkeley SPICE3 components.
+,*
+,* The circuit is an AC coupled transistor amplifier with
+,* a sinewave input at node "1", a gain of approximately -3.9,
+,* and output on node "coll".
+,*
+.tran 1e-5 2e-3
+,*
+vcc vcc 0 12.0
+vin 1 0 0.0 ac 1.0 sin(0 1 1k)
+ccouple 1 base 10uF
+rbias1 vcc base 100k
+rbias2 base 0 24k
+q1 coll base emit generic
+rcollector vcc coll 3.9k
+remitter emit 0 1k
+,*
+.probe v(emit) v(vcc) v(1) v(base) v(coll) vcc#branch vin#branch
+.model generic npn
+,*
+.end
+#+end_src
