@@ -15,19 +15,24 @@ V2 in 0 DC 0 SIN(0 200M 4K 0 0 0) AC 200M
 R4 0 out  {RLOAD}
 VPr1 _net4 _net3 DC 0
 .control
-echo "" > spice4qucs.cir.noise
-echo "" > spice4qucs.cir.pz
+*echo "" > spice4qucs.cir.noise
+*echo "" > spice4qucs.cir.pz
+set gnuplot_terminal=png
+
 let Rload=47k
 tran 1e-06 0.001 0 
 let Pwr=(V(out)*V(out))/Rload
-write BJT_tran.txt VPr1#branch v(in) v(out)  Pwr
+write circuits/qucs-npn-tran.data VPr1#branch v(in) v(out) Pwr
+gnuplot circuits/qucs-npn-pwr Pwr
+gnuplot circuits/qucs-npn-voltage v(in) v(out)
 destroy all
 reset
 
 let Rload=47k
 ac dec 21 100 10meg 
 let K=V(out)/V(in)
-write BJT_ac.txt VPr1#branch v(in) v(out)  K
+write circuits/qucs-npn-ac.data VPr1#branch v(in) v(out)  K
+gnuplot circuits/qucs-npn-gain v(in) v(out) K
 destroy all
 reset
 
