@@ -8,6 +8,10 @@
 
 * Main
 
++ [[http://ngspice.sourceforge.net/ngspice-tutorial.html][ngspice tutorial]]
++ [[https://tiagoweber.github.io/blog/entry1.html][another RC circuit simulation]]
+
+
 ** Kicad Components
 
 ** Spice Example
