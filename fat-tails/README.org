@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       f69a11fc-ae4d-49cc-9e4f-fbaebb66dc7b
+:END:
+#+TITLE:     Fat Tails
+#+AUTHOR:    David Conner
+#+EMAIL:     noreply@te.xel.io
+#+DESCRIPTION: Nassim Taleb: Statistical Consequences of Fat Tails
+
+
+* Setup
+** Running Pluto
+
++ Setting =PLUTO_FAT_TAILS= allows for reuse of precompiled environment.
+  - It works, but the environments don't age well.
+  - When combined with the code in the =ch4= notebook, the Julia process can't manage its lifecycle properly.
+
+#+begin_src sh
+PLUTO_FAT_TAILS=1 julia --project=. --threads=auto -e "using Pluto; Pluto.run(4321)"
+#+end_src
+
+*  Misc
+
+[[https://github.com/fonsp/Pluto.jl/pull/707][Converting *.jl script]] to a Pluto Notebook
