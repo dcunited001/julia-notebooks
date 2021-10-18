@@ -1,0 +1,9 @@
+#+TITLE:     Julia Notebooks
+#+AUTHOR:    David Conner
+#+EMAIL:     noreply@te.xel.io
+#+DESCRIPTION: notes
+#+STARTUP: content
+
+*** BJT Common Emitter Results
+
+[[file:sim-circuit/acme-jl.png][file:sim-circuit/acme-jl.png]]

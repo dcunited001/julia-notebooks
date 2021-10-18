@@ -31,20 +31,6 @@ begin
 	using ACME
 end
 
-# ╔═╡ 02fb317c-2c3f-11ec-23c9-1b08e81f8d75
-begin
-	using Markdown
-	using InteractiveUtils
-
-	macro bind(def, element)
-		quote
-			local el = $(esc(element))
-			global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
-			el
-		end
-	end
-end
-
 
 # ╔═╡ eea40830-be91-428d-a9ff-4412e2f80b82
 begin
@@ -69,7 +55,6 @@ md"Time steps: **T** $(@bind T Slider(10 : 1 : 10000, default=1000, show_value=t
 
 # ╔═╡ a6c3e1dc-9825-4dd9-a089-a24de6c52c52
 md"AC Frequency: **f** $(@bind f Slider(1 : 0.01 : 10000, default=500, show_value=true))"
-
 
 # ╔═╡ ae175083-ee6e-4d29-946f-6b5915ed8775
 begin
@@ -146,7 +131,6 @@ begin
 end
 
 # ╔═╡ Cell order:
-# ╠═02fb317c-2c3f-11ec-23c9-1b08e81f8d75
 # ╠═2ded4703-7224-4c12-9bab-03654f729d5f
 # ╠═1ae0743b-3706-46b6-98cc-497a2295b84f
 # ╠═c191db29-cd9d-4756-995f-2455bd47947a

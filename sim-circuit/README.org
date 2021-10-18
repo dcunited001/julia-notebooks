@@ -2,3 +2,8 @@
 #+AUTHOR:    David Conner
 #+EMAIL:     noreply@te.xel.io
 #+DESCRIPTION: notes
+#+STARTUP: content
+
+*** BJT Common Emitter Results
+
+[[file:acme-jl.png][file:acme-jl.png]]
