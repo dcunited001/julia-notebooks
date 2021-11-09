@@ -1,0 +1,24 @@
+#+TITLE:     Astronomy Notebooks
+#+AUTHOR:    David Conner
+#+EMAIL:     noreply@te.xel.io
+#+DESCRIPTION: notes
+
+
+*** Julia Tools
++ [[https://juliaastro.github.io/dev/index.html][JuliaAstro libraries]]
++ [[https://rafaqz.github.io/GeoData.jl/stable/#Examples-and-Plotting][GeoData docs & plots]]
++ [[https://github.com/mkretlow/VSOP87.jl][VSOP87.jl]]
+  - given the VSOP planetary motion harmonic coefficeints
+  - this lib uses Fortran lib to solve for the planets' positions.
+
+
+*** API's
+
++ [[https://www.astro.com/swisseph/swephinfo_e.htm][Swiss Ephemeris API]]
++ [[https://www.programmableweb.com/news/10-top-astronomy-apis/brief/2020/02/17][Top Ten Space API's]]
++ [[https://ssd.jpl.nasa.gov/planets/][NASA JPL Planet API's]]
+
+  + JPL [[https://ssd.jpl.nasa.gov/planets/eph_export.html][PLanetary & Lunar Ephimerides]]
+  + JPL [[https://ssd.jpl.nasa.gov/horizons/][Horizons System]]
+
+*** Misc
